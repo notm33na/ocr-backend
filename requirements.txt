@@ -1,0 +1,46 @@
+# FastAPI and web server
+fastapi==0.124.0
+uvicorn[standard]==0.38.0
+python-multipart==0.0.9
+
+# Image processing
+pillow==12.0.0
+opencv-python-headless==4.8.1.78
+
+# PyTorch (CPU-only for cloud deployment)
+# Note: Install PyTorch separately with:
+# pip install --index-url https://download.pytorch.org/whl/cpu torch==2.2.0 torchvision==0.17.0
+# Or use install.sh / install.ps1 scripts
+# For GPU: pip install --index-url https://download.pytorch.org/whl/cu118 torch torchvision
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.2.0
+torchvision==0.17.0
+
+# Transformers and HuggingFace
+transformers==4.57.3
+peft==0.6.2
+huggingface-hub>=0.34.0  # Required by transformers 4.57.3
+safetensors>=0.4.3  # Required by transformers 4.57.3
+# tokenizers will be installed automatically by transformers with compatible version
+
+# YOLO for text detection
+ultralytics==8.1.8
+
+# Scientific computing
+numpy>=1.26.0,<2.0.0  # Python 3.12 compatible with pre-built wheels
+scipy>=1.11.0
+
+# UTRNet dependencies
+lmdb==1.4.1
+pytz==2024.1
+
+# Text processing (for medical corrections)
+regex==2023.12.25
+
+# Utilities
+tqdm==4.66.1
+pyyaml==6.0.1
+
+# Optional: For better Urdu text processing
+# arabic-reshaper==3.0.0
+# PyArabic==0.6.15

@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+temp_*
+tmp/
+*.tmp
+*.temp
+
+# Image files (test images)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+
+# Text output files
+*.txt
+!requirements.txt
+!runtime.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Model outputs (keep model files, ignore outputs)
+e2e_outputs/
+outputs/
+results/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Note: Model files (.pt, .pth, model directories) are NOT ignored
+# Use Git LFS for large model files:
+# git lfs track "*.pt"
+# git lfs track "*.pth"
+# git lfs track "trocr-lora-unified/**"
+# git lfs track "saved_models/**"
