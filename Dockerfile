@@ -28,5 +28,5 @@ RUN chmod +x start.sh
 EXPOSE 8080
 
 # Start the FastAPI server using startup script
-CMD ["./start.sh"]
+CMD ["/bin/bash", "./start.sh"]
 
