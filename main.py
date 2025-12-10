@@ -88,15 +88,10 @@ urdu_device = None
 BASE_DIR = Path(__file__).parent
 PARENT_DIR = BASE_DIR.parent
 
-TROCR_CHECKPOINT = BASE_DIR / "trocr-lora-unified"
-if not TROCR_CHECKPOINT.exists():
-    TROCR_CHECKPOINT = PARENT_DIR / "trocr-base-printed" / "trocr-lora-unified"
+TROCR_CHECKPOINT = BASE_DIR / "models" / "trocr" / "trocr-lora-unified"
 
-URDU_DETECTION_MODEL = PARENT_DIR / "urdu-text-detection" / "yolov8m_UrduDoc (1).pt"
+URDU_DETECTION_MODEL = BASE_DIR / "models" / "yolo" / "yolov8m_UrduDoc.pt"
 URDU_RECOGNITION_MODEL = BASE_DIR / "models" / "utrnet" / "best_accuracy.pth"
-# Fallback to old path if new path doesn't exist
-if not URDU_RECOGNITION_MODEL.exists():
-    URDU_RECOGNITION_MODEL = PARENT_DIR / "UTRNet-High-Resolution-Urdu-Text-Recognition" / "saved_models" / "UTRNet-Large" / "best_norm_ED.pth"
 URDU_GLYPHS_FILE = PARENT_DIR / "UTRNet-High-Resolution-Urdu-Text-Recognition" / "UrduGlyphs.txt"
 
 # Detection model path for English OCR (YOLO)
