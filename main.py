@@ -337,12 +337,22 @@ def process_urdu_ocr(image_path: str) -> str:
 
 @app.on_event("startup")
 async def load_models():
-    """Load OCR models at startup"""
+    """Load OCR models at startup (non-blocking to prevent crashes)"""
     global english_model, english_processor, english_device
     global urdu_detection_model, urdu_recognition_model, urdu_converter, urdu_opt, urdu_device
     
     port = int(os.getenv("PORT", 8000))
     logger.info(f"Starting OCR Backend API on port {port}")
+    logger.info("Models will load in background - API is ready for requests")
+    
+    # Load models in background to prevent blocking
+    import asyncio
+    asyncio.create_task(load_models_background())
+    
+async def load_models_background():
+    """Load models in background task"""
+    global english_model, english_processor, english_device
+    global urdu_detection_model, urdu_recognition_model, urdu_converter, urdu_opt, urdu_device
     
     # Load English TrOCR model
     logger.info("Loading English TrOCR-LoRA model...")
@@ -360,7 +370,6 @@ async def load_models():
     except Exception as e:
         logger.error(f"Failed to load English TrOCR model: {e}", exc_info=True)
         logger.warning("Continuing without English model - API will return errors for English OCR")
-        # Don't let model loading failure crash the server
         english_model = None
         english_processor = None
     
@@ -420,7 +429,6 @@ async def load_models():
     except Exception as e:
         logger.error(f"Failed to load Urdu OCR models: {e}", exc_info=True)
         logger.warning("Continuing without Urdu model - API will return errors for Urdu OCR")
-        # Don't let model loading failure crash the server
         urdu_detection_model = None
         urdu_recognition_model = None
     
