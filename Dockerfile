@@ -21,7 +21,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy all application files
 COPY . .
 
-# Expose port (Railway will set PORT env var dynamically)
+# Set default PORT (Railway will override this)
+ENV PORT=8080
+
+# Expose port
 EXPOSE 8080
 
 # Start the FastAPI server using Python script (reads PORT from env)
