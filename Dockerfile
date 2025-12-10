@@ -25,5 +25,5 @@ COPY . .
 EXPOSE 8080
 
 # Start the FastAPI server (use PORT env var, default to 8080)
-CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080} --workers 1
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080} --workers 1"]
 
