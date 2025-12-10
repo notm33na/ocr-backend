@@ -27,9 +27,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Add parent directories to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent / "trocr-base-printed"))
-sys.path.insert(0, str(Path(__file__).parent.parent / "UTRNet-High-Resolution-Urdu-Text-Recognition"))
+# Add current directory to path for imports (for Docker deployment)
+# In Docker, all files are in /app, so we don't need parent directories
+BASE_PATH = Path(__file__).parent
+sys.path.insert(0, str(BASE_PATH))
 
 # Import OCR modules
 try:
