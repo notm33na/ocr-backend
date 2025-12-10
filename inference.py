@@ -10,24 +10,11 @@ import argparse
 warnings.filterwarnings("ignore", message=".*were not initialized from the model checkpoint.*")
 warnings.filterwarnings("ignore", message=".*You should probably TRAIN this model.*")
 
-# Import GPU health check (UTRNet-style)
-from gpu_health import assert_gpu_ok, check_gpu_health
-
 def load_model(checkpoint_path="trocr-lora-base", device=None, base_model_name=None):
     """Load trained TrOCR model with LoRA adapter"""
     if device is None:
-        # GPU Health Check (UTRNet-style)
-        print("\n" + "="*60)
-        print("GPU HEALTH CHECK")
-        print("="*60)
-        try:
-            assert_gpu_ok(device_id=0, require_gpu=False)
-            has_gpu = torch.cuda.is_available()
-        except RuntimeError as e:
-            print(f"⚠️  {str(e)}")
-            print("   Continuing with CPU\n")
-            has_gpu = False
-        device = torch.device("cuda" if has_gpu else "cpu")
+        # Use CPU for cloud deployment
+        device = torch.device("cpu")
     
     print(f"Using device: {device}")
     print(f"Loading model from: {checkpoint_path}")

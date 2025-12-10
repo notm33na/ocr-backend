@@ -348,9 +348,11 @@ async def load_models():
     logger.info("Loading English TrOCR-LoRA model...")
     try:
         if load_trocr_model is not None and TROCR_CHECKPOINT.exists():
+            logger.info(f"Loading model from: {TROCR_CHECKPOINT}")
+            # Force CPU device - no GPU checks
             english_model, english_processor, english_device = load_trocr_model(
                 str(TROCR_CHECKPOINT),
-                device=None
+                device=torch.device("cpu")
             )
             logger.info("✅ English TrOCR-LoRA model loaded successfully")
         else:
@@ -359,13 +361,16 @@ async def load_models():
     except Exception as e:
         logger.error(f"Failed to load English TrOCR model: {e}", exc_info=True)
         logger.warning("Continuing without English model - API will return errors for English OCR")
+        # Don't let model loading failure crash the server
+        english_model = None
+        english_processor = None
     
     # Load Urdu OCR models
     logger.info("Loading Urdu OCR models...")
     try:
         if YOLO is not None and URDU_DETECTION_MODEL.exists():
-            # Load detection model
-            urdu_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            # Load detection model (use CPU for cloud deployment)
+            urdu_device = torch.device("cpu")
             logger.info(f"Using device: {urdu_device}")
             
             urdu_detection_model = YOLO(str(URDU_DETECTION_MODEL))
@@ -416,8 +421,13 @@ async def load_models():
     except Exception as e:
         logger.error(f"Failed to load Urdu OCR models: {e}", exc_info=True)
         logger.warning("Continuing without Urdu model - API will return errors for Urdu OCR")
+        # Don't let model loading failure crash the server
+        urdu_detection_model = None
+        urdu_recognition_model = None
     
     logger.info("✅ Model loading complete. API is ready to accept requests.")
+    logger.info(f"English OCR available: {english_model is not None}")
+    logger.info(f"Urdu OCR available: {urdu_detection_model is not None and urdu_recognition_model is not None}")
 
 
 @app.get("/", status_code=status.HTTP_200_OK)
