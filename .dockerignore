@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+!README.md
+
+# Test files
+test_*.py
+test_*.ps1
+test_*.sh
+*_test.py
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+temp_*
+tmp/
+*.tmp
+*.temp
+
+# Output files
+e2e_outputs/
+outputs/
+results/
+*_ocr_result.txt
+*_visualization.png
+
+# Keep models directory - we want to copy models
+# models/
+
