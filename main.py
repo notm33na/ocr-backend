@@ -349,7 +349,6 @@ async def load_models():
     try:
         if load_trocr_model is not None and TROCR_CHECKPOINT.exists():
             logger.info(f"Loading model from: {TROCR_CHECKPOINT}")
-            # Force CPU device - no GPU checks
             english_model, english_processor, english_device = load_trocr_model(
                 str(TROCR_CHECKPOINT),
                 device=torch.device("cpu")
@@ -369,7 +368,7 @@ async def load_models():
     logger.info("Loading Urdu OCR models...")
     try:
         if YOLO is not None and URDU_DETECTION_MODEL.exists():
-            # Load detection model (use CPU for cloud deployment)
+            # Load detection model (CPU only)
             urdu_device = torch.device("cpu")
             logger.info(f"Using device: {urdu_device}")
             

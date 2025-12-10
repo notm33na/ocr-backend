@@ -232,8 +232,8 @@ def detect_text_regions(image_path, detection_model_path, conf_threshold=0.2, im
     """
     print(f"\n🔍 Detecting text regions in: {image_path}")
     
-    # Load detection model
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    # Load detection model (CPU only)
+    device = 'cpu'
     detection_model = YOLO(detection_model_path)
     
     # Load image
@@ -539,7 +539,7 @@ def ocr_paragraph(
         print(f"\n📚 Loading TrOCR handwritten model (microsoft/trocr-base-handwritten)")
         # Use handwritten model for better handwritten text recognition
         from transformers import TrOCRProcessor, VisionEncoderDecoderModel
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        device = torch.device("cpu")
         model = VisionEncoderDecoderModel.from_pretrained("microsoft/trocr-base-handwritten")
         processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-handwritten")
         model = model.to(device)
@@ -548,7 +548,7 @@ def ocr_paragraph(
         print(f"\n📚 Loading base English TrOCR model (microsoft/trocr-base-printed)")
         # Use base English model directly
         from transformers import TrOCRProcessor, VisionEncoderDecoderModel
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        device = torch.device("cpu")
         model = VisionEncoderDecoderModel.from_pretrained("microsoft/trocr-base-printed")
         processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-printed")
         model = model.to(device)
