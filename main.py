@@ -88,11 +88,11 @@ urdu_device = None
 BASE_DIR = Path(__file__).parent
 PARENT_DIR = BASE_DIR.parent
 
-TROCR_CHECKPOINT = BASE_DIR / "models" / "trocr" / "trocr-lora-unified"
 
+TROCR_CHECKPOINT = BASE_DIR / "models" / "trocr" / "trocr-lora-unified"
 URDU_DETECTION_MODEL = BASE_DIR / "models" / "yolo" / "yolov8m_UrduDoc.pt"
 URDU_RECOGNITION_MODEL = BASE_DIR / "models" / "utrnet" / "best_accuracy.pth"
-URDU_GLYPHS_FILE = PARENT_DIR / "UTRNet-High-Resolution-Urdu-Text-Recognition" / "UrduGlyphs.txt"
+URDU_GLYPHS_FILE = BASE_DIR / "UrduGlyphs.txt"
 
 # Detection model path for English OCR (YOLO)
 ENGLISH_DETECTION_MODEL = URDU_DETECTION_MODEL  # Can use same YOLO model for English detection
